@@ -25,7 +25,7 @@ A ShadowSocks Pac file Generator with fetched China IP range, which helps walk a
 6. Have fun.
 
 ### Use executable file(Windows Only):
-1. Download GenPac.rar from [here](http://foryoung365.github.io/attachments/GenPac.rar), decompress GenPac.exe to local disk. If you have ShadowSocks-gui config file, jump to step 3;
+1. Download GenPac.rar from [here](http://foryoung365.github.io/attachments/GenPac.zip), decompress GenPac.exe to local disk. If you have ShadowSocks-gui config file, jump to step 3;
 2. Download latest ShadowSocks-gui from [ShadowSocks](http://sourceforge.net/projects/shadowsocksgui/files/dist/), version 2.3 or higher required. Or Simply run GenPac.py Without any argument, it will download a lastest one for you. Run ShadowSocks-gui and configure your server. Make sure it generate a config file.
 3. Copy GenPac.exe to your ShadowSocks-gui folder.
 4. Run GenPac.exe and wait a few minutes while pac.txt generating.
