@@ -14,13 +14,11 @@ A ShadowSocks Pac file Generator with fetched China IP range, which helps walk a
 
   git clone https://github.com/foryoung365/ShadowSocksPac.git
 
-4.Copy the config file to the folder and run GenPac.py. Wait a few minutes while pac.txt generating:
+4. Copy the config file to the folder and run GenPac.py. Wait a few minutes while pac.txt generating:
 
-  GenPac.py -f[FileName] -d[0 or 1]
-  
-  -f: your ShadowSocks-gui config file name, default:gui-config.json
-  -d: 0-do not download 1-download latest ShadowSocks-gui automatically, default:1
-  
+  GenPac.py -f[FileName] -d[0 or 1]  
+  -f: your ShadowSocks-gui config file name, default:gui-config.json  
+  -d: 0-do not download 1-download latest ShadowSocks-gui automatically, default:1  
 5. Copy pac.txt to your ShadowSocks-gui folder. Open ShadowSocks-gui and select pac mode.
 6. Have fun.
 
