@@ -10,6 +10,8 @@ import struct;
 import json;
 import os;
 import sys;
+import httplib;
+import zipfile;
 
 def LogAndExit(log):
     print(log);
@@ -662,14 +664,48 @@ def fetch_ip_data():
 
     return results
 
+def DownloadShadowSocks():
+    conn = httplib.HTTPConnection("sourceforge.net")
+    conn.request("GET","/projects/shadowsocksgui/files/latest/download?source=files")
+    resp = conn.getresponse();
+    respData = resp.read();
+    resp.close();
+    conn.close();
+    linkBegin = respData.find("http://");
+    linkEnd = respData.find(";");
+    url = respData[linkBegin:linkEnd];
+    
+    print ("Downloading ShadowSocks-gui from %s..."% (url));
+    file = urllib2.urlopen(url);
+    fileData = file.read();
+    file.close();
+    zipFileName = "ShadowSock.zip";
+    localFile = open(zipFileName, "wb");
+    localFile.write(fileData);
+    localFile.close();
+    print "Download completed Successfully...";
+    print "Decompressing " + zipFileName + "...";
+    zipSs = zipfile.ZipFile(zipFileName,'r');
+    for f in zipSs.namelist():
+        zipSs.extract(f);
+    zipSs.close();
+    print "Decompressing completed Successfully...";
+    os.remove(zipFileName);
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Generate proxy auto-config rules.")
-    parser.add_argument('-c', '--ConfigFile',
-                        dest    = 'ConfigFile',
+    parser.add_argument('-f', '--FileName',
+                        dest    = 'FileName',
                         default = 'gui-config.json',
                         nargs   = '?',
                         help    = "ShadowSocks-gui Config File Name, examples: gui-config.json");
+    parser.add_argument('-d', '--Download',
+                        dest    = 'Download',
+                        default = '1',
+                        nargs   = '?',
+                        help    = "Download latest ShadowSocks from http://sourceforge.net/projects/shadowsocksgui");
     args = parser.parse_args();
-    configs = LoadConfig(args.ConfigFile);
+    if args.Download != 0:
+        DownloadShadowSocks();
+    configs = LoadConfig(args.FileName);
     generate_pac(configs);
