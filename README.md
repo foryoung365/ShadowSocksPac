@@ -19,7 +19,7 @@ A ShadowSocks Pac file Generator. Generate Pac file automaticlly base on your sh
 5. Copy pac.txt to your ShadowSocks-gui folder. Open ShadowSocks-gui and select pac mode.
 6. Done.
 
-### Use executable file:
+### Use executable file(Windows Only):
 1. Download newest ShadowSocks-gui from [ShadowSocks](http://sourceforge.net/projects/shadowsocksgui/files/dist/), version 2.3 or higher required. Run ShadowSocks-gui and configure your server. Make sure it generate a config file.
 2. Copy GenPac.exe to your ShadowSocks-gui folder.
 3. Run GenPac.exe and wait a few seconds while pac.txt generating.
