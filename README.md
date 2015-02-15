@@ -18,8 +18,8 @@ A ShadowSocks Pac file Generator with fetched China IP range, which helps walk a
 
   GenPac.py -f[FileName] -d[0 or 1]
   
--f: your ShadowSocks-gui config file name, default:gui-config.json
--d: 0-do not download 1-download latest ShadowSocks-gui automatically, default:1
+  -f: your ShadowSocks-gui config file name, default:gui-config.json
+  -d: 0-do not download 1-download latest ShadowSocks-gui automatically, default:1
   
 5. Copy pac.txt to your ShadowSocks-gui folder. Open ShadowSocks-gui and select pac mode.
 6. Have fun.
