@@ -2,7 +2,6 @@
 # foryoung365.github.io
 # Based on flora_Pac project (by leaskh)
 import re;
-import urllib2;
 import argparse;
 import math;
 import socket;
@@ -10,8 +9,7 @@ import struct;
 import json;
 import os;
 import sys;
-import httplib;
-import zipfile;
+import urllib.request;
 
 def LogAndExit(log):
     print(log);
@@ -622,13 +620,13 @@ function FindProxyForURL(url, host) {
 
 def fetch_ip_data():
     #fetch data from apnic
-    print "Fetching data from apnic.net, it might take a few minutes, please wait..."
+    print ("Fetching data from apnic.net, it might take a few minutes, please wait...")
     url=r'http://ftp.apnic.net/apnic/stats/apnic/delegated-apnic-latest'
   # url=r'http://flora/delegated-apnic-latest' #debug
-    data=urllib2.urlopen(url).read()
+    data=urllib.request.urlopen(url).read()
 
     cnregex=re.compile(r'apnic\|cn\|ipv4\|[0-9\.]+\|[0-9]+\|[0-9]+\|a.*',re.IGNORECASE)
-    cndata=cnregex.findall(data)
+    cndata=cnregex.findall(str(data))
 
     results=[]
     prev_net=''
@@ -664,34 +662,6 @@ def fetch_ip_data():
 
     return results
 
-def DownloadShadowSocks():
-    conn = httplib.HTTPConnection("sourceforge.net")
-    conn.request("GET","/projects/shadowsocksgui/files/latest/download?source=files")
-    resp = conn.getresponse();
-    respData = resp.read();
-    resp.close();
-    conn.close();
-    linkBegin = respData.find("http://");
-    linkEnd = respData.find(";");
-    url = respData[linkBegin:linkEnd];
-    
-    print ("Downloading ShadowSocks-gui from %s..."% (url));
-    file = urllib2.urlopen(url);
-    fileData = file.read();
-    file.close();
-    zipFileName = "ShadowSock.zip";
-    localFile = open(zipFileName, "wb");
-    localFile.write(fileData);
-    localFile.close();
-    print "Download completed Successfully...";
-    print "Decompressing " + zipFileName + "...";
-    zipSs = zipfile.ZipFile(zipFileName,'r');
-    for f in zipSs.namelist():
-        zipSs.extract(f);
-    zipSs.close();
-    print "Decompressing completed Successfully...";
-    os.remove(zipFileName);
-
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Generate proxy auto-config rules.")
     parser.add_argument('-f', '--FileName',
@@ -699,13 +669,6 @@ if __name__ == '__main__':
                         default = 'gui-config.json',
                         nargs   = '?',
                         help    = "ShadowSocks-gui Config File Name, examples: gui-config.json");
-    parser.add_argument('-d', '--Download',
-                        dest    = 'Download',
-                        default = '1',
-                        nargs   = '?',
-                        help    = "Download latest ShadowSocks from http://sourceforge.net/projects/shadowsocksgui");
     args = parser.parse_args();
-    if args.Download != 0:
-        DownloadShadowSocks();
     configs = LoadConfig(args.FileName);
     generate_pac(configs);
