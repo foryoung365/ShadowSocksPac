@@ -625,8 +625,8 @@ def fetch_ip_data():
   # url=r'http://flora/delegated-apnic-latest' #debug
     data=urllib.request.urlopen(url).read()
 
-    cnregex=re.compile(r'apnic\|cn\|ipv4\|[0-9\.]+\|[0-9]+\|[0-9]+\|a.*',re.IGNORECASE)
-    cndata=cnregex.findall(str(data))
+    cnregex=re.compile(r'apnic\|cn\|ipv4\|[0-9\.]+\|[0-9]+\|[0-9]+\|a[a-z]*',re.IGNORECASE)
+    cndata=cnregex.findall(str(data));print (cndata)
 
     results=[]
     prev_net=''
